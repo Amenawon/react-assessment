@@ -38,18 +38,38 @@
 }
 
 
-table {
-  font-family: arial, sans-serif;
+.styled-table {
   border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
   width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+main { margin: auto; max-width: 960px; }
+
+.table-container {
+  margin: 10px;
+  padding: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
 }
 
-td, th {
-  border: 1px solid #dddddd;
+
+tr.expandable > td > .inner {
+  margin-left: 15px;
+  overflow: hidden;
+}
+table{
+  width:100%;
+}
+tr{
+  cursor: pointer;
+}
+th{
   text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
 }
