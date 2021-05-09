@@ -55,8 +55,6 @@ main { margin: auto; max-width: 960px; }
 .table-container {
   margin: 10px;
   padding: 0;
-  border: 1px solid #e5e5e5;
-  border-radius: 5px;
 }
 
 
@@ -72,4 +70,89 @@ tr{
 }
 th{
   text-align: left;
+}
+.btn-add {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.align-left{
+  text-align: left;
+  margin-bottom: 2rem;
+}
+.align-right{
+  text-align: right;
+  margin: 1rem 2rem 0rem 0rem;
+}
+.modal{
+  height: 100%;
+  width: 100%;
+}
+.row{
+  display: flex;
+    flex-wrap: wrap;
+    
+    width: 100%;
+    max-width: 100%;
+}
+.align-items-end {
+  align-items: flex-end!important;
+}
+.col {
+  flex: 0 0 auto;
+  width: 25%;
+/* padding: 10px; */
+}
+.col-3 {
+  flex:0 0 auto;
+  width: 25%;
+/* padding: 10px; */
+}
+input, select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.btn-cancel{
+  border-radius: 4px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #ff0000;
+  color:white;
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin:  0 auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+.justify-content-evenly {
+  justify-content: space-evenly!important;
+}
+.add-container {
+  border-radius: 5px;
+   padding: 20px;
+}
+.hide-col{
+  visibility: hidden;
 }
