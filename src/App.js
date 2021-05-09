@@ -50,17 +50,17 @@ class App extends React.Component {
     addToProducts = (event) => {
       event.preventDefault();
       const newProd={
-        id: Math.floor(Math.random() * 100) + this.state.randomId, //generate random id on the fields
+        id: 0, //generate random id on the fields
         name: this.state.productName,
         prices:[
           {
             date:this.state.previousPriceDate,
-            id: Math.floor(Math.random() * 100) + this.state.randomId,//generate random id on the fields
+            id:0,//generate random id on the fields
             price: this.state.previousPrice
           },
           {
             date:this.state.currentPriceDate,
-            id: Math.floor(Math.random() * 100) + this.state.randomId,//generate random id on the fields
+            id: 0,//generate random id on the fields
             price: this.state.currentPrice
           }
         ]
@@ -75,7 +75,10 @@ class App extends React.Component {
       const value = e.target.value;
       this.setState({[name]: value});
     }
-    
+    handleCallback = (data) =>{
+      this.setState({products: data})
+  }
+
     componentDidMount() {
     fetch('http://www.mocky.io/v2/5c3e15e63500006e003e9795')
       .then(response => response.json())
@@ -90,6 +93,7 @@ class App extends React.Component {
         <div className="table-container">
           <div className="uk-overflow-auto">
           <div className="align-left"><button className="btn-add" onClick={this.openModal}> Add New Product</button></div>
+          <h5>Click on each row to view the historical prices</h5>
 
             <table className="uk-table uk-table-hover uk-table-middle uk-table-divider">
 
@@ -104,7 +108,7 @@ class App extends React.Component {
                 {isLoading
                   ? <tr><td className="uk-text-center"><em className="uk-text-muted">Loading...</em></td></tr>
                   : products.map((product, index) =>
-                      <ProductListing key={index} index={index + 1} product={product}/>
+                      <ProductListing updatedProducts={this.handleCallback} key={index} index={index} product={product} products={products}/>
                     )
                 }
               </tbody>
@@ -118,12 +122,11 @@ class App extends React.Component {
 
         </div>
           <div className="add-container">
-          <form >
-
+ 
           <div className="row justify-content-evenly">
             <div className="col">
            <p >Product</p>
-            <input type="text" id="productName" autocomplete="off"
+            <input type="text" id="productName" autoComplete="off"
             onChange={(event) => this.handleUserInput(event)}
              value={this.state.productName} name="productName" placeholder="Enter product name"/>
          </div>
@@ -160,8 +163,7 @@ name="currentPrice" value={this.state.currentPrice} placeholder="Please provide 
            <div className="align-right">
            <button className="btn-add" onClick={this.addToProducts}> Add Product</button>
           </div>
-           </form>
-</div>
+ </div>
         </Modal>                              
       </main>
     );
