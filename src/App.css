@@ -125,7 +125,14 @@ input, select {
   border-radius: 4px;
   box-sizing: border-box;
 }
-.btn-cancel{
+.btn-edit{
+  border-radius: 4px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color:#44c767;
+  color:white;
+}
+.btn-delete{
   border-radius: 4px;
   padding: 5px 10px;
   border: 1px solid #ccc;
