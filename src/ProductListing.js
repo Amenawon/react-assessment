@@ -61,23 +61,16 @@ class ProductListing extends React.Component {
   };
 
   saveProducts= (event)=>{
+    var array = [...this.state.products]; // make a separate copy of the array
+    array[this.state.currentIndex].name = this.state.productName;
+    array[this.state.currentIndex].prices[1].price = this.state.previousPrice;
+    array[this.state.currentIndex].prices[0].price = this.state.currentPrice;
+
     this.setState((state,props)=>({ 
-      // productName:this.state.productName,
-      // currentPrice:this.state.currentPrice,
-      // previousPrice:this.state.previousPrice,
-      products:[...this.state.products, //optimize this code
-         this.state.products.map((item, index) => {
-           
-         if(this.state.currentIndex === index){
-          item.name = this.state.productName;
-          item.prices[0].price = this.state.currentPrice;
-          item.prices[1].price = this.state.previousPrice;
-          return item;
-        }
-      }
-         )
-    ]
+    products: array
+
     })); 
+    
      this.props.updatedProducts(this.state.products);
      this.closeModal();
 
@@ -87,8 +80,7 @@ class ProductListing extends React.Component {
     this.setState({ modalIsOpen: false });
   };
   deleteProduct = (product, index) => {
-    console.log(product,this.state.products);
-
+ 
     var array = [...this.state.products]; // make a separate copy of the array
     
     this.setState({
