@@ -101,7 +101,9 @@ class App extends React.Component {
                 <tr>
                   <th className="uk-table-shrink" >Id</th>
                     <th>Product(mg)</th>
-                  <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
               </thead>
               <tbody>  

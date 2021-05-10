@@ -51,7 +51,6 @@ class ProductListing extends React.Component {
     }
   
   openModal = (product, index) => {
-    console.log(product,this.state.products);
      this.setState({ modalIsOpen: true ,
       productName:product.name,
       previousPrice:product.prices[0].price,
@@ -63,9 +62,9 @@ class ProductListing extends React.Component {
 
   saveProducts= (event)=>{
     this.setState((state,props)=>({ 
-      productName:this.state.productName,
-      previousPrice:this.state.previousPrice,
-      currentPrice:this.state.currentPrice,
+      // productName:this.state.productName,
+      // currentPrice:this.state.currentPrice,
+      // previousPrice:this.state.previousPrice,
       products:[...this.state.products, //optimize this code
          this.state.products.map((item, index) => {
            
@@ -73,7 +72,7 @@ class ProductListing extends React.Component {
           item.name = this.state.productName;
           item.prices[0].price = this.state.currentPrice;
           item.prices[1].price = this.state.previousPrice;
-          return;
+          return item;
         }
       }
          )
@@ -87,6 +86,26 @@ class ProductListing extends React.Component {
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
+  deleteProduct = (product, index) => {
+    console.log(product,this.state.products);
+
+    var array = [...this.state.products]; // make a separate copy of the array
+    
+    this.setState({
+      products:[...array,array.map((item,i)=>{
+      if(index === i){
+        delete item.name;
+        delete item.id;
+        return item
+
+      }
+    })
+    ]
+
+});
+     this.props.updatedProducts(this.state.products);
+
+};
   
   handleUserInput (e) {
     const name = e.target.name;
@@ -94,8 +113,7 @@ class ProductListing extends React.Component {
     this.setState({[name]: value});
   }
   toggleExpander = (e) => {
-    if (e.target.type === 'checkbox') return;
-
+ 
     if (!this.state.expanded) {
       this.setState(
         { expanded: true },
@@ -119,14 +137,16 @@ class ProductListing extends React.Component {
         <td className="uk-text-nowrap">{product.id}.</td>
         <td>{product.name}</td>
         <td> <button onClick={()=> {this.openModal(product,this.props.index ) }} className="btn-edit">Edit Product</button> 
-        <button onClick={this.toggleExpander} className="btn-edit">View Prices</button>
       </td>
-        <td> <button className="btn-delete">Delete Product</button></td>
+      <td> 
+        <button className="btn-edit"  onClick={this.toggleExpander}>View Prices</button>
+      </td>
+        <td> <button className="btn-delete" onClick={()=> {this.deleteProduct(product,this.props.index ) }}>Delete Product</button></td>
       </tr>,
       this.state.expanded && ( product.prices.map((item, index) =>
        <tr className="expandable" key={'tr-expander'+index}>
           <td className="" colSpan={6} key={'tr-expander-child'+index} >
-            <div ref={this.expanderBody} key={'tr-expander-children'+index} className="inner uk-grid">
+            <div ref="expanderBody" key={'tr-expander-children'+index} className="inner uk-grid">
             <div className="uk-width-3-4">
    <b> <p>Price at {formatDate(item.date)} was {item.price}</p></b>
               </div>
